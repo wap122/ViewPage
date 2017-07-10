@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
@@ -11,9 +10,36 @@
         android:layout_height="wrap_content"
         android:src="@drawable/facebook" />
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/edt_fist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:hint="Nhập Họ" />
+
+        <EditText
+            android:id="@+id/edt_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:hint="Nhập Tên" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_additem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ahhi_ch" />
+        android:layout_gravity="center"
+        android:text="Add into List" />
+
+    <ListView
+        android:id="@+id/lv_android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

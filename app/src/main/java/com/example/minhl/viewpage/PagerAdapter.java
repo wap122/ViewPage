@@ -1,5 +1,7 @@
 package com.example.minhl.viewpage;
 
+import android.content.Context;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -9,20 +11,25 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    public PagerAdapter(FragmentManager fm) {
+    private Context context;
+    private IOSFragment iosFragment;
+
+    public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.context = context;
+        iosFragment = new IOSFragment(context);
     }
 
+//Muốn giữ View thật ra tạo 1 viewHolder cũng dc :D
     @Override
     public Fragment getItem(int position) {
-
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = new AndroidFragment();
+                frag = new AndroidFragment(context, iosFragment);
                 break;
             case 1:
-                frag = new IOSFragment();
+                frag = iosFragment;
                 break;
             case 2:
                 frag = new PHPFragment();
