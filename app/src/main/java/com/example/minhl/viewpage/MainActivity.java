@@ -7,8 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager pager;
-    TabLayout tabLayout;
+
+    private ViewPager pager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
