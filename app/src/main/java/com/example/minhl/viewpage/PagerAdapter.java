@@ -1,6 +1,7 @@
 package com.example.minhl.viewpage;
 
 import android.content.Context;
+import android.content.MutableContextWrapper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,17 +15,21 @@ import java.util.List;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUMBER_FRAGMENT = 5;
-    public List<Callback> listCallback = new ArrayList<>();
+    private MyTopic myTopic;
     private Context context;
 
 
     public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
-        listCallback.add(new SecondFragment(context));
-        listCallback.add(new ThirdFragment(context));
-        listCallback.add(new ForthFragment(context));
-        listCallback.add(new FifthFragment(context));
+        myTopic = new MyTopic();
+
+        myTopic.register(new SecondFragment(context));
+        myTopic.register(new ThirdFragment(context));
+        myTopic.register(new ForthFragment(context));
+        myTopic.register(new FifthFragment(context));
+
+
     }
 
 //Muốn giữ View thật ra tạo 1 viewHolder cũng dc :D
@@ -33,19 +38,19 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = new FirstFragment(context, listCallback);
+                frag = new FirstFragment(context, myTopic);
                 break;
             case 1:
-                frag = (Fragment) listCallback.get(0);
+                frag = (Fragment) myTopic.observers.get(0);
                 break;
             case 2:
-                frag = (Fragment) listCallback.get(1);
+                frag = (Fragment) myTopic.observers.get(1);
                 break;
             case 3:
-                frag = (Fragment) listCallback.get(2);
+                frag = (Fragment) myTopic.observers.get(2);
                 break;
             case 4:
-                frag = (Fragment) listCallback.get(3);
+                frag = (Fragment) myTopic.observers.get(3);
                 break;
         }
         return frag;

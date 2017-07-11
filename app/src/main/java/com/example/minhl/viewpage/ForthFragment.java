@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForthFragment extends Fragment implements Callback {
+public class ForthFragment extends Fragment implements Observer {
 
     private Context context;
     private ListView lvForth;
@@ -32,7 +32,7 @@ public class ForthFragment extends Fragment implements Callback {
     }
 
     @Override
-    public void sendItem(String fullName) {
+    public void update(String fullName) {
         list.add(fullName);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
         lvForth.setAdapter(arrayAdapter);

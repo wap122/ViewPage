@@ -13,11 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class FifthFragment extends Fragment implements Callback {
+public class FifthFragment extends Fragment implements Observer {
 
     private Context context;
     private ListView lvFifth;
@@ -36,7 +32,7 @@ public class FifthFragment extends Fragment implements Callback {
     }
 
     @Override
-    public void sendItem(String fullName) {
+    public void update(String fullName) {
         list.add(fullName);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
         lvFifth.setAdapter(arrayAdapter);

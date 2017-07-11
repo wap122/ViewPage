@@ -26,11 +26,11 @@ public class FirstFragment extends Fragment {
     private EditText edtFirstName;
     private EditText edtLastName;
     private List<String> list;
-    private List<Callback> listCallback;
+    private MyTopic myTopic;
     private String fullName;
 
-    public FirstFragment(Context context, List<Callback> listTemp) {
-        this.listCallback = listTemp;
+    public FirstFragment(Context context, MyTopic myTopic) {
+        this.myTopic = myTopic;
         this.context = context;
     }
 
@@ -52,9 +52,7 @@ public class FirstFragment extends Fragment {
                 if (isEmpty(fullName)) return;
                 list.add(fullName);
                 applyChangeToListView();
-                for (Callback E : listCallback) {
-                    E.sendItem(fullName);
-                }
+                myTopic.sendItem(fullName);
             }
         });
 

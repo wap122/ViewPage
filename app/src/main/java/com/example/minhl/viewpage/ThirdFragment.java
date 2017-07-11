@@ -17,7 +17,7 @@ import java.util.List;
  * Created by minhl on 10/07/2017.
  */
 
-public class ThirdFragment extends Fragment implements Callback {
+public class ThirdFragment extends Fragment implements Observer {
 
     private Context context;
     private ListView lvThird;
@@ -36,7 +36,7 @@ public class ThirdFragment extends Fragment implements Callback {
     }
 
     @Override
-    public void sendItem(String fullName) {
+    public void update(String fullName) {
         list.add(fullName);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
         lvThird.setAdapter(arrayAdapter);

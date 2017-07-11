@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondFragment extends Fragment implements Callback {
+public class SecondFragment extends Fragment implements Observer {
 
     private Context context;
     private ListView lvSecond;
@@ -36,7 +36,7 @@ public class SecondFragment extends Fragment implements Callback {
     }
 
     @Override
-    public void sendItem(String fullName) {
+    public void update(String fullName) {
         list.add(fullName);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
         lvSecond.setAdapter(arrayAdapter);
