@@ -2,7 +2,6 @@ package com.example.minhl.viewpage;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,26 +19,25 @@ import java.util.Objects;
  * Created by minhl on 10/07/2017.
  */
 
-public class AndroidFragment extends Fragment {
+public class FirstFragment extends Fragment {
 
-    private Callback callback;
     private Context context;
     private ListView lvAndroid;
     private EditText edtFirstName;
     private EditText edtLastName;
     private List<String> list;
-    private IOSFragment iosFragment;
+    private List<Callback> listCallback;
     private String fullName;
 
-    public AndroidFragment(Context context, IOSFragment iosFragment) {
-        this.iosFragment = iosFragment;
+    public FirstFragment(Context context, List<Callback> listTemp) {
+        this.listCallback = listTemp;
         this.context = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_android, container, false);
+        View view = inflater.inflate(R.layout.fragment_first, container, false);
         lvAndroid = (ListView) view.findViewById(R.id.lv_android);
         Button btnAddItem = (Button) view.findViewById(R.id.btn_additem);
         edtFirstName = (EditText) view.findViewById(R.id.edt_fist_name);
@@ -55,16 +52,13 @@ public class AndroidFragment extends Fragment {
                 if (isEmpty(fullName)) return;
                 list.add(fullName);
                 applyChangeToListView();
-                sendItemToFragment(iosFragment);
+                for (Callback E : listCallback) {
+                    E.sendItem(fullName);
+                }
             }
         });
 
         return view;
-    }
-
-    private void sendItemToFragment(Callback callback) {
-        this.callback = callback;
-        this.callback.sendItem(fullName);
     }
 
     private void applyChangeToListView() {

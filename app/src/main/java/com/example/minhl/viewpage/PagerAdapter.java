@@ -1,23 +1,30 @@
 package com.example.minhl.viewpage;
 
 import android.content.Context;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by minhl on 10/07/2017.
  */
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
+    private static final int NUMBER_FRAGMENT = 5;
+    public List<Callback> listCallback = new ArrayList<>();
     private Context context;
-    private IOSFragment iosFragment;
+
 
     public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
-        iosFragment = new IOSFragment(context);
+        listCallback.add(new SecondFragment(context));
+        listCallback.add(new ThirdFragment(context));
+        listCallback.add(new ForthFragment(context));
+        listCallback.add(new FifthFragment(context));
     }
 
 //Muốn giữ View thật ra tạo 1 viewHolder cũng dc :D
@@ -26,13 +33,19 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = new AndroidFragment(context, iosFragment);
+                frag = new FirstFragment(context, listCallback);
                 break;
             case 1:
-                frag = iosFragment;
+                frag = (Fragment) listCallback.get(0);
                 break;
             case 2:
-                frag = new PHPFragment();
+                frag = (Fragment) listCallback.get(1);
+                break;
+            case 3:
+                frag = (Fragment) listCallback.get(2);
+                break;
+            case 4:
+                frag = (Fragment) listCallback.get(3);
                 break;
         }
         return frag;
@@ -40,7 +53,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return NUMBER_FRAGMENT;
     }
 
     @Override
@@ -48,13 +61,19 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         String title = "";
         switch (position) {
             case 0:
-                title = "Android";
+                title = "First";
                 break;
             case 1:
-                title = "IOS";
+                title = "Second";
                 break;
             case 2:
-                title = "PHP";
+                title = "Third";
+                break;
+            case 3:
+                title = "Forth";
+                break;
+            case 4:
+                title = "Fifth";
                 break;
         }
 

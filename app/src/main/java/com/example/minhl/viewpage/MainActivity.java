@@ -26,6 +26,6 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        pager.setOffscreenPageLimit(3); // cái này là để lưu page lại , ko cho bị xóa :D
+        pager.setOffscreenPageLimit(5); // cái này là để lưu page lại , ko cho bị xóa :D
     }
 }

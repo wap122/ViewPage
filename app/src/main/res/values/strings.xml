@@ -3,4 +3,7 @@
     <string name="ahhi_ch">Ahhi đồ chó</string>
     <string name="em_l_ios">Em là IOS</string>
     <string name="em_l_php">Em là PHP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
