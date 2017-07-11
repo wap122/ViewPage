@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_fist_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/shut_the_f_ck_up"
         android:src="@drawable/facebook" />
 
     <LinearLayout
@@ -20,26 +23,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:hint="Nhập Họ" />
+            android:hint="@string/nh_p_h" />
 
         <EditText
             android:id="@+id/edt_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:hint="Nhập Tên" />
+            android:hint="@string/nh_p_t_n" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_additem"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Add into List" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_into_list" />
+
+        <Button
+            android:id="@+id/btn_clear_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/clear_list" />
+
+    </RelativeLayout>
+
 
     <ListView
         android:id="@+id/lv_android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="187dp" />
+
+    <fragment
+        android:name="com.example.minhl.viewpage.DetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_detail" />
 
 </LinearLayout>
