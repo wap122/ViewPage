@@ -15,6 +15,7 @@ import java.util.List;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUMBER_FRAGMENT = 5;
+
     private MyTopic myTopic;
     private Context context;
 
@@ -22,13 +23,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
+
         myTopic = new MyTopic();
 
         myTopic.register(new SecondFragment(context));
         myTopic.register(new ThirdFragment(context));
         myTopic.register(new ForthFragment(context));
         myTopic.register(new FifthFragment(context));
-
 
     }
 
@@ -41,16 +42,16 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 frag = new FirstFragment(context, myTopic);
                 break;
             case 1:
-                frag = (Fragment) myTopic.observers.get(0);
+                frag = (Fragment) myTopic.getObserver(0);
                 break;
             case 2:
-                frag = (Fragment) myTopic.observers.get(1);
+                frag = (Fragment) myTopic.getObserver(1);
                 break;
             case 3:
-                frag = (Fragment) myTopic.observers.get(2);
+                frag = (Fragment) myTopic.getObserver(2);
                 break;
             case 4:
-                frag = (Fragment) myTopic.observers.get(3);
+                frag = (Fragment) myTopic.getObserver(3);
                 break;
         }
         return frag;

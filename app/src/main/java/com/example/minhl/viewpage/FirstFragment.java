@@ -25,7 +25,7 @@ public class FirstFragment extends Fragment {
     private ListView lvAndroid;
     private EditText edtFirstName;
     private EditText edtLastName;
-    private List<String> list;
+    private CustomList list;
     private MyTopic myTopic;
     private String fullName;
 
@@ -37,13 +37,14 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         lvAndroid = (ListView) view.findViewById(R.id.lv_android);
         Button btnAddItem = (Button) view.findViewById(R.id.btn_additem);
         edtFirstName = (EditText) view.findViewById(R.id.edt_fist_name);
         edtLastName = (EditText) view.findViewById(R.id.edt_last_name);
 
-        list = new ArrayList<>();
+        list = CustomList.getInstance();
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override

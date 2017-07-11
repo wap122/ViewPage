@@ -61,4 +61,8 @@ public class MyTopic implements Subject {
         notifyObservers();
     }
 
+    public Observer getObserver(int position) {
+        return observers.get(position);
+    }
+
 }
