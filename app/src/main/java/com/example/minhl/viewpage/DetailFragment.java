@@ -11,22 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DetailFragment extends Fragment {
-    private static DetailFragment detailFragment;
 
-    private static TextView tvDetail;
+    private TextView tvDetail;
+    private String detail;
 
-//    public static synchronized DetailFragment getInstance() {
-//        if (detailFragment == null) {
-//            detailFragment = new DetailFragment();
-//        }
-//        return detailFragment;
-//    }
-
-    public DetailFragment() {
-    }
-
-    public static void changeDetail(String detail) {
-        tvDetail.setText(detail);
+    public DetailFragment(String detail) {
+        this.detail = detail;
     }
 
     @Nullable
@@ -34,6 +24,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         tvDetail = (TextView) view.findViewById(R.id.tv_detail);
+        tvDetail.setText(detail);
         return view;
     }
 }

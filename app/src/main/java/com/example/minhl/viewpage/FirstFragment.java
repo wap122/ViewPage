@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import java.util.Objects;
 public class FirstFragment extends Fragment {
 
     private static final String EMPTY_LIST = "Xóa list rồi còn đâu :(";
-
+    private static FragmentTransaction fragmentTransaction;
     private Context context;
     private EditText edtFirstName, edtLastName;
     private MyTopic myTopic;
@@ -33,6 +34,13 @@ public class FirstFragment extends Fragment {
     public FirstFragment(Context context, MyTopic myTopic) {
         this.myTopic = myTopic;
         this.context = context;
+    }
+
+    public static void replaceDetailFragment(DetailFragment detailFragment) {
+        fragmentTransaction.replace(R.id.fl_container,
+                detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -44,13 +52,19 @@ public class FirstFragment extends Fragment {
         Button btnClearList = (Button) view.findViewById(R.id.btn_clear_list);
         edtFirstName = (EditText) view.findViewById(R.id.edt_fist_name);
         edtLastName = (EditText) view.findViewById(R.id.edt_last_name);
+        fragmentTransaction = getChildFragmentManager().beginTransaction();
+        final ListFragment listFragment = new ListFragment(context);
+        getChildFragmentManager().beginTransaction().add(R.id.fl_container,
+                listFragment).commit();
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fullName = getFullName();
                 if (isEmpty(fullName)) return;
-                ListFragment.changeListView(context, fullName);
+
+                listFragment.changeListView(fullName);
+
 //                myTopic.sendItem(fullName);
             }
         });
@@ -59,8 +73,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CustomList.getInstance().clear();
-                ListFragment.changeListView(context, null);
-                DetailFragment.changeDetail(EMPTY_LIST);
+                listFragment.changeListView(null);
             }
         });
 

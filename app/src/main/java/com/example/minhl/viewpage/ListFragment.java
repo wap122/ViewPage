@@ -19,16 +19,20 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
-    private static ListView lvSomething;
-    private static CustomList list;
+    private ListView lvSomething;
+    private CustomList list;
+    private Context context;
+    private DetailFragment detailFragment;
 
-    public ListFragment() {
+    public ListFragment(Context context) {
+        this.context = context;
     }
 
-    public static void changeListView(Context context, String fullName) {
+    public void changeListView(String fullName) {
         if (fullName != null) {
             list.add(fullName);
         }
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_list_item_1, list);
 
@@ -43,24 +47,16 @@ public class ListFragment extends Fragment {
         lvSomething = (ListView) view.findViewById(R.id.lv_something);
         list = CustomList.getInstance();
 
+
         lvSomething.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                addDetailFragment();
-                DetailFragment.changeDetail(list.get(position));
+                detailFragment = new DetailFragment(list.get(position));
+                FirstFragment.replaceDetailFragment(detailFragment);
+//                detailFragment.changeDetail(list.get(position));
             }
         });
+
         return view;
-    }
-
-//    @Override
-//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        addDetailFragment();
-//    }
-
-    private void addDetailFragment() {
-        getChildFragmentManager().beginTransaction().replace(R.id.frag_container, new DetailFragment()).commit();
-        getChildFragmentManager().executePendingTransactions();
     }
 }
