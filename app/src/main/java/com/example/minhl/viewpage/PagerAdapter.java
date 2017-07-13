@@ -39,7 +39,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         Fragment frag = null;
         switch (position) {
             case 0:
-                frag = new FirstFragment(context, myTopic);
+                frag = new FirstFragment(myTopic);
                 break;
             case 1:
                 frag = (Fragment) myTopic.getObserver(0);

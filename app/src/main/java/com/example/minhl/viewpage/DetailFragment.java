@@ -25,6 +25,8 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         tvDetail = (TextView) view.findViewById(R.id.tv_detail);
         tvDetail.setText(detail);
+
         return view;
     }
+
 }

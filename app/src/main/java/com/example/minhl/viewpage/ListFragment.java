@@ -19,13 +19,18 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
+    private static ListFragment instance;
+    public CustomList list;
     private ListView lvSomething;
-    private CustomList list;
-    private Context context;
-    private DetailFragment detailFragment;
 
-    public ListFragment(Context context) {
-        this.context = context;
+    private ListFragment() {
+    }
+
+    public static synchronized ListFragment getInstance() {
+        if (instance == null) {
+            instance = new ListFragment();
+        }
+        return instance;
     }
 
     public void changeListView(String fullName) {
@@ -33,7 +38,7 @@ public class ListFragment extends Fragment {
             list.add(fullName);
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context,
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_list_item_1, list);
 
         lvSomething.setAdapter(arrayAdapter);
@@ -47,13 +52,13 @@ public class ListFragment extends Fragment {
         lvSomething = (ListView) view.findViewById(R.id.lv_something);
         list = CustomList.getInstance();
 
-
         lvSomething.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                detailFragment = new DetailFragment(list.get(position));
-                FirstFragment.replaceDetailFragment(detailFragment);
-//                detailFragment.changeDetail(list.get(position));
+                getParentFragment().getChildFragmentManager().beginTransaction()
+                        .replace(R.id.ll_container, new DetailFragment(list.get(position)))
+                        .addToBackStack(null).commit();
+
             }
         });
 

@@ -28,4 +28,13 @@ public class MainActivity extends AppCompatActivity {
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         pager.setOffscreenPageLimit(5); // cái này là để lưu page lại , ko cho bị xóa :D
     }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
